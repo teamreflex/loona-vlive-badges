@@ -2,3 +2,13 @@
 UserScript to show member name badges on chats with their confirmed accounts.
 
 ![example](/example.jpg)
+
+### Install
+- Install a userscript extension in your browser, such as TamperMonkey, GreaseMonkey, or ViolentMonkey.
+- Go to the script [here](https://github.com/teamreflex/loona-vlive-badges/raw/master/loona-vlive-badges.user.js)
+- Confirm installation, now go to a currently live vlive and it should be working.
+
+### Caveats
+- Script was whipped up in a few minutes, so it's a little finicky.
+- Only works in live chats.
+- Missing Choerry and Olivia Hye's vlive IDs.
