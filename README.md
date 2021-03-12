@@ -14,5 +14,5 @@ UserScript to show member name badges on chats with their confirmed accounts.
 - Missing Choerry and Olivia Hye's vlive IDs.
 
 ### Info
-- User IDs from subbit: [@gointosubbit](https://twitter.com/gointosubbit)
+- User IDs from Team Subbits: [@gointosubbit](https://twitter.com/gointosubbit)
 - [@Kairuxo](https://twitter.com/Kairuxo)
