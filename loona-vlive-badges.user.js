@@ -20,7 +20,7 @@
     { name: 'Yves',       color: 'brown',                   id: '76d03b80-8bf7-11e6-88df-000000002102' },
     { name: 'Chuu',       color: 'peachpuff; color: black', id: '1fc49510-18cd-11e9-9777-246e96487868' },
     { name: 'Go Won',     color: 'palegreen; color: black', id: 'c7fd2860-3b44-11e5-be21-000000001a8c' },
-    { name: 'Olivia Hye', color: 'grey; color: black',      id: '-missing-' },
+    { name: 'Olivia Hye', color: 'grey; color: black',      id: '54f60490-f18e-11e9-99b5-246e964ce2b8' },
     { name: 'soulbriz',   color: 'gold; color: black',      id: 'b32ae600-d25e-11e5-8239-000000003984' },
   ];
   
