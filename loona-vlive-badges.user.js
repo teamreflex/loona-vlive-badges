@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           LOONA vlive badges
+// @name           LOONA vlive detect
 // @version        1.0
 // @description    Detects LOONA members in chat.
 // @match          https://www.vlive.tv/*
@@ -56,8 +56,17 @@
     return template.content.firstChild;
   }
   
+  function isIterable(obj) {
+    // checks for null and undefined
+    if (obj == null) {
+      return false;
+    }
+    return typeof obj[Symbol.iterator] === 'function';
+  }
+  
   // parse userId from the css class list
   function parseUserId(classList) {
+    if (! isIterable(classList)) return null;
     let parsed = [...classList];
     
     let foundId = parsed.find(c => c.startsWith('_user_id_no_'));
