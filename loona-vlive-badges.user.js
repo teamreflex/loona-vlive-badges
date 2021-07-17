@@ -97,7 +97,7 @@
     const channelName = document.getElementsByClassName('channel_name--1VIVt')[0];
     if (channelName.getAttribute('title') !== '이달의 소녀(LOONA)') {
       console.log('Not on LOONA vlive, disabling.');
-      return;
+      //return;
     }
 
     let chatbox = document.getElementsByClassName('u_cbox_list')[0];
