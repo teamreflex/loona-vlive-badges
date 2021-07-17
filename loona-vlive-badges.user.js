@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           LOONA vlive detect
-// @version        1.0
+// @version        1.1
 // @description    Detects LOONA members in chat.
 // @match          https://www.vlive.tv/*
 // @grant          none
@@ -20,7 +20,7 @@
     { name: 'Yves',       color: 'brown',                   id: '76d03b80-8bf7-11e6-88df-000000002102' },
     { name: 'Chuu',       color: 'peachpuff; color: black', id: '1fc49510-18cd-11e9-9777-246e96487868' },
     { name: 'Go Won',     color: 'palegreen; color: black', id: 'c7fd2860-3b44-11e5-be21-000000001a8c' },
-    { name: 'Olivia Hye', color: 'grey; color: black',      id: '54f60490-f18e-11e9-99b5-246e964ce2b8' },
+    { name: 'Olivia Hye', color: 'grey; color: black',      id: '610b1690-de62-11eb-8ebb-246e9648766c' },
     { name: 'soulbriz',   color: 'gold; color: black',      id: 'b32ae600-d25e-11e5-8239-000000003984' },
   ];
   
@@ -80,6 +80,11 @@
   setTimeout(() => {
     let chatbox = document.getElementsByClassName('u_cbox_list')[0];
     if (chatbox) console.log('Chatbox loaded.');
+    
+    // clear chatbox
+    chatbox.innerHTML = '';
+    
+    let matches = [];
   
     observeDOM(chatbox, m => {
       var addedNodes = [];
@@ -88,21 +93,45 @@
       // filter because our badge-adding also comes through
       // loop because sometimes two chats come through one update
       addedNodes.filter(node => node.localName = 'li').forEach(chat => {
+        if (! chat) return;
+        
         // does the chat match the ids?
         let member = parseUserId(chat.classList);
-        if (! member) return;
-      
+        
+        // extract commentId
+        const info = chat.getAttribute('data-info');
+        const commentId = info.split(',')[0].split(':')[1];
+        if (matches.includes(commentId)) {
+          if (! member) {
+            chat.remove();
+          }
+          
+          return;
+        }
+        matches.push(commentId);
+        
+        // remove any non-member chat
+        if (! member) {
+          chat.remove();
+          return;
+        }
+        
         // output chat to console
-        //let nick = chat.querySelector('.u_cbox_nick').textContent;
-        //let message = chat.querySelector('.u_cbox_contents').textContent;
-        //console.log(`${nick}: ${message}`);
+        let nick = chat.querySelector('.u_cbox_nick').textContent;
+        let message = chat.querySelector('.u_cbox_contents').textContent;
+        console.log({
+          message: message,
+          name: nick,
+          member: member ? member.name : nick,
+          commentId: commentId,
+        });
         
         // set bubble color
-        chat.querySelector('.u_cbox_area').style.backgroundColor = '#f5e0ff';
+        chat.querySelector('.u_cbox_area').style.backgroundColor = 'rgb(66, 245, 105, 0.7)';
       
         // add badge
         let user = chat.querySelector('.u_cbox_name');
-        let badge = htmlToElement(`<span class="u_cbox_ico_level u_cbox_Fanclub" style="background-image: none; background-color: ${member.color};">${member.name}</span>`);
+        let badge = htmlToElement(`<span class="u_cbox_ico_level u_cbox_Premium" style="background-image: none; background-color: ${member.color};">${member.name}</span>`);
         user.before(badge);
       });
     });
