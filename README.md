@@ -1,7 +1,7 @@
 # loona-vlive-badges
 UserScript to show member name badges on chats with their confirmed accounts.
 
-![example](/example.jpg)
+![example](/example.png)
 
 ### Install
 - Install a userscript extension in your browser, such as TamperMonkey, GreaseMonkey, or ViolentMonkey.
