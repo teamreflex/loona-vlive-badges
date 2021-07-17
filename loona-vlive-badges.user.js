@@ -64,16 +64,32 @@
     return typeof obj[Symbol.iterator] === 'function';
   }
   
-  // parse userId from the css class list
-  function parseUserId(classList) {
+  // parse the classList to a valid iterable
+  function parseClassList(chat) {
+    const classList = chat.classList;
     if (! isIterable(classList)) return null;
-    let parsed = [...classList];
+    return [...classList];
+  }
+  
+  // parse info from the css class list
+  function parseInfo(chat) {
+    let parsed = parseClassList(chat);
+    if (! parsed) return { member: false, commentId: false };
     
+    let userId = false;
     let foundId = parsed.find(c => c.startsWith('_user_id_no_'));
-    if (foundId === undefined) return null;
+    if (foundId !== undefined) {
+      let parsedId = foundId.replace('_user_id_no_', '');
+      userId = userIds.find(u => u.id === parsedId);
+    }
     
-    let parsedId = foundId.replace('_user_id_no_', '');
-    return userIds.find(u => u.id === parsedId);
+    let commentId = parsed.find(c => c.startsWith('cbox_module__comment_'));
+    commentId = commentId.replace('cbox_module__comment_', '');
+        
+    return {
+      member: userId,
+      commentId,
+    };
   }
   
   // delay by 5 seconds as the chat is loaded in async
@@ -99,15 +115,16 @@
       // filter because our badge-adding also comes through
       // loop because sometimes two chats come through one update
       addedNodes.filter(node => node.localName = 'li').forEach(chat => {
-        if (! chat) return;
+        // skip over any node that isn't a valid chat
+        const classList = parseClassList(chat);
+        const objectIsBadgeInsert = (classList === null || !!classList.find(c => c.startsWith('u_cbox_ico_level')));
+        if (! chat || typeof chat !== 'object' || objectIsBadgeInsert) return;
         
         // does the chat match the ids?
-        let member = parseUserId(chat.classList);
+        const { member, commentId } = parseInfo(chat);
+        if (! commentId) return;
         
-        // extract commentId
-        const info = chat.getAttribute('data-info');
-        if (! info) return;
-        const commentId = info.split(',')[0].split(':')[1];
+        // remove chat if already logged
         if (matches.includes(commentId)) {
           if (! member) {
             chat.remove();
