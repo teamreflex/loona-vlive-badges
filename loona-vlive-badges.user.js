@@ -76,18 +76,20 @@
     let parsed = parseClassList(chat);
     if (! parsed) return { member: false, commentId: false };
     
+    let member = false;
     let userId = false;
     let foundId = parsed.find(c => c.startsWith('_user_id_no_'));
     if (foundId !== undefined) {
-      let parsedId = foundId.replace('_user_id_no_', '');
-      userId = userIds.find(u => u.id === parsedId);
+      userId = foundId.replace('_user_id_no_', '');
+      member = userIds.find(u => u.id === userId);
     }
     
     let commentId = parsed.find(c => c.startsWith('cbox_module__comment_'));
     commentId = commentId.replace('cbox_module__comment_', '');
         
     return {
-      member: userId,
+      userId,
+      member,
       commentId,
     };
   }
@@ -101,7 +103,12 @@
     }
 
     let chatbox = document.getElementsByClassName('u_cbox_list')[0];
-    if (chatbox) console.log('Chatbox loaded.');
+    if (! chatbox) {
+      console.log('Chatbox not found.')
+      return;
+    }
+    
+    console.log('Chatbox loaded.');
     
     // clear chatbox
     chatbox.innerHTML = '';
@@ -121,7 +128,7 @@
         if (! chat || typeof chat !== 'object' || objectIsBadgeInsert) return;
         
         // does the chat match the ids?
-        const { member, commentId } = parseInfo(chat);
+        const { userId, member, commentId } = parseInfo(chat);
         if (! commentId) return;
         
         // remove chat if already logged
@@ -133,6 +140,13 @@
           return;
         }
         matches.push(commentId);
+        
+        console.log({
+          name: chat.querySelector('.u_cbox_nick').textContent,
+          message: chat.querySelector('.u_cbox_contents').textContent,
+          comment: commentId,
+          userId: userId,
+        });
         
         // remove any non-member chat
         if (! member) {
