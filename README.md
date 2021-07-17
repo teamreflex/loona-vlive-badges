@@ -15,4 +15,4 @@ UserScript to show member name badges on chats with their confirmed accounts.
 
 ### Info
 - User IDs from Team Subbits: [@gointosubbit](https://twitter.com/gointosubbit)
-- Support on hrlg
+- [@Kairuxo](https://twitter.com/Kairuxo)
