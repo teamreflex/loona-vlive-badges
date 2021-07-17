@@ -78,6 +78,12 @@
   
   // delay by 5 seconds as the chat is loaded in async
   setTimeout(() => {
+    const channelName = document.getElementsByClassName('channel_name--1VIVt')[0];
+    if (channelName.getAttribute('title') !== '이달의 소녀(LOONA)') {
+      console.log('Not on LOONA vlive, disabling.');
+      return;
+    }
+
     let chatbox = document.getElementsByClassName('u_cbox_list')[0];
     if (chatbox) console.log('Chatbox loaded.');
     
@@ -100,6 +106,7 @@
         
         // extract commentId
         const info = chat.getAttribute('data-info');
+        if (! info) return;
         const commentId = info.split(',')[0].split(':')[1];
         if (matches.includes(commentId)) {
           if (! member) {
