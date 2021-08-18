@@ -11,7 +11,7 @@ UserScript to show member name badges on chats with their confirmed accounts.
 ### Caveats
 - Script was whipped up in a few minutes, so it's a little finicky.
 - Only works in live chats.
-- Missing Choerry's vlive IDs.
+- Sometimes chats just don't come through. Unknown as to why.
 
 ### Info
 - User IDs from Team Subbits: [@gointosubbit](https://twitter.com/gointosubbit)
