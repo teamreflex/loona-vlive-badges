@@ -16,7 +16,7 @@
     { name: 'Vivi',       color: 'pink; color: black',                                id: 'e49f2280-1eaa-11eb-8fcf-a0086f45fe06' },
     { name: 'Kim Lip',    color: 'red',                                               id: '476f21f0-d952-11e6-9fae-000000007398' },
     { name: 'Jinsoul',    color: 'blue',                                              id: '42698900-9b6b-11ea-9eaa-246e96487f70' },
-    { name: 'Choerry',    color: 'purple',                                            id: '-missing-' },
+    { name: 'Choerry',    color: 'purple',                                            id: '94fff180-68cc-11ea-b591-a0086f45fe1c' },
     { name: 'Yves',       color: 'brown',                                             id: '76d03b80-8bf7-11e6-88df-000000002102' },
     { name: 'Chuu',       color: 'peachpuff; color: black',                           id: '1fc49510-18cd-11e9-9777-246e96487868' },
     { name: 'Go Won',     color: 'palegreen; color: black; border: 1px solid black;', id: 'c7fd2860-3b44-11e5-be21-000000001a8c' },
